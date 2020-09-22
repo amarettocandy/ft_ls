@@ -1,0 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls_format.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmilda <cmilda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 00:04:37 by cmilda            #+#    #+#             */
+/*   Updated: 2020/02/24 00:04:40 by cmilda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LS_FORMAT_H
+# define LS_FORMAT_H
+
+# include "ls_inc.h"
+
+# define TABSIZE 8
+
+struct			s_1col_f
+{
+	int			imax;
+	int			bmax;
+	int			total;
+};
+
+struct			s_mcol_f
+{
+	int			imax;
+	int			bmax;
+	int			total;
+	int			wmax;
+	int			count;
+	int			ccol;
+	int			crow;
+	int			wtmax;
+	int			cym;
+};
+
+struct			s_lcol_f
+{
+	blkcnt_t	bmax;
+	int			imax;
+	int			total;
+	int			gmax;
+	int			umax;
+	int			smax;
+	int			lmax;
+	int			mj_max;
+	int			mn_max;
+};
+
+void			ls_putfiles(void);
+char			*ls_put_device_id(char *s, struct s_lcol_f *f, t_fileinfo *fl);
+void			ls_putdir(void);
+int				ls_get_decs(size_t num);
+void			ls_st_1col_f_scan(struct s_1col_f *frmt);
+void			ls_long_init_f(struct s_lcol_f *f);
+void			ls_multi_init_f(struct s_mcol_f *f);
+char			*ls_strcat(char *a, const char *b);
+char			*ls_n2s_rformat(size_t a, int len, char filler, char *st);
+char			*ls_catind(int len, char *start, t_fileinfo *file);
+char			*ls_catbsz(int len, char *start, t_fileinfo *file);
+char			*ls_cattotal(char *start, int total);
+char			*ls_catcolor(char *start, t_fileinfo *file);
+char			*ls_cattypesym(char *start, t_fileinfo *file);
+char			*ls_putfile_lcol(char *st, t_fileinfo *fl, struct s_lcol_f *f);
+char			*ls_cataccess(char *st, t_fileinfo *file);
+char			*ls_catnlinks(int len, char *st, int nlinks);
+char			*ls_strcat_lfrt(char *st, int len, char filler, char *str);
+char			*ls_catbytes(char *st, struct s_lcol_f *f, t_fileinfo *fl);
+char			*ls_cattime(char *st, t_fileinfo *fl);
+char			*ls_catlinkinfo(char *st, t_fileinfo *fl);
+char			*ls_catxattr(char *st, t_fileinfo *fl);
+char			*ls_catacl(char *st, t_fileinfo *fl);
+void			ls_size_mj_mn_calc(struct s_lcol_f *f, t_fileinfo *fi);
+void			ls_putarray_mcl(t_dlist **a, struct s_mcol_f *f, char *b);
+
+#endif
